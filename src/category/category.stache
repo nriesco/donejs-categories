@@ -1,0 +1,38 @@
+<div class="row">
+  <div class="page-header">
+    <h1>{{message}} <br><small>Click on a category name to start exploring...</small></h1>
+  </div>
+  {{#if categoriesPromise.isPending}}
+    <div class="list-group-item list-group-item-info">
+      <h4 class="list-group-item-heading">Loading...</h4>
+    </div>
+  {{/if}}
+  {{#if categoriesPromise.isRejected}}
+    <div class="list-group-item list-group-item-danger">
+      <h4 class="list-group3--item-heading">Error</h4>
+      <p class="list-group-item-text">{{categoriesPromise.__observeData.reason.statusText}}</p>
+      <!-- <p class="list-group-item-text">{{helper1 categoriesPromise}}</p> -->
+    </div>
+  {{/if}}
+  {{#if categoriesPromise.isResolved}}
+  <h5 class="list-group-item-headingQQQ" ($click)="goHome(this)"> <button class="btn btn-success btn-sm"><i class="fa fa-fast-backward" aria-hidden="true"></i> Home / root</button></h5>
+    {{#each categoriesPromise.value}}
+    <div class="list-group-itemQQQ">
+      <div class="row" style="border-top: 1px solid #ddd;padding: 5px;color: #333;font-weight: 100; font-size: 16px;padding-left: 30px;">
+        <div class="col-md-5" ($click)="categoryVMMethod1(this)"><i class="fa fa-check-square-o" aria-hidden="true"></i> {{text}}</div>
+        <div class="col-md-2"><span class="btn btn-primary"><i class="fa fa-edit" aria-hidden="true"></i> <input style="background: inherit;border: 0px;" class="form-controlQQ" {($value)}="title"></span></div>
+        <div class="col-md-2" ($click)="categoryVMMethod2(this)"><span class="btn btn-success"><i class="fa fa-hand-pointer-o" aria-hidden="true"></i> categoryVMMethod2</span></div>
+        <!-- <div class="col-md-5">{{text}} / {{categoryProperty1}} / {{categoryVMProperty1}}</div> -->
+        <!-- <div class="col-md-2" ($click)="categoryMethod1(this)">categoryMethod1</div> -->
+        <!-- <div class="col-md-2" ($click)="categoryVMMethod1(this)">categoryVMMethod1</div> -->
+      </div>
+    </div>
+    {{else}}
+      <!-- <div class="list-group-item"> -->
+        <!-- <h4 class="list-group-item-heading">No more sub-categories!</h4> -->
+        <div class="alert alert-warning" role="alert"><strong>oops!</strong> no more sub-categories available</div>
+      <!-- </div> -->
+    {{/each}}
+    <h5 class="list-group-item-headingQQQ" ($click)="goBack(this)"> <button class="btn btn-success btn-sm"><i class="fa fa-backward" aria-hidden="true"></i> Back</button> (sorry, you can only go back one level)</h5>
+  {{/if}}
+</div>

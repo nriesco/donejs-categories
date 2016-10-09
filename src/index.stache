@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <can-import from="donejs-categories/styles.less!" />
+    <can-import from="bootstrap/less/bootstrap.less!" />
+    <can-import from="font-awesome/css/font-awesome.min.css!" />
+    <can-import from="donejs-categories/app" export-as="viewModel" />
+    <can-import from="donejs-categories/category/" />
+
+    <div class="container">
+      <category-menu {(categoryVMMethod2)}="globalVMMethod1" />
+    </div>
+
+    {{#switch env.NODE_ENV}}
+      {{#case "production"}}
+        <script src="{{joinBase 'node_modules/steal/steal.production.js'}}"  main="donejs-categories/index.stache!done-autorender"></script>
+      {{/case}}
+      {{#default}}
+        <script src="/node_modules/steal/steal.js"></script>
+      {{/default}}
+    {{/switch}}
+  </body>
+</html>
